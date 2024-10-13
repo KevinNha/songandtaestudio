@@ -4,17 +4,23 @@ export default $config({
 	app(input) {
 		return {
 			name: 'songandtaestudio',
-			removal: input?.stage === 'production' ? 'retain' : 'remove',
+			removal: input?.stage === 'prod' ? 'retain' : 'remove',
 			home: 'aws',
 			providers: {
 				aws: {
-					profile: input.stage === 'production' ? 'songandtaestudio-prod' : 'songandtaestudio-dev',
+					profile: input.stage === 'prod' ? 'songandtaestudio-prod' : 'songandtaestudio-dev',
 					region: 'us-west-2'
 				}
 			}
 		};
 	},
 	async run() {
-		new sst.aws.SvelteKit('MyWeb');
+		new sst.aws.SvelteKit('MyWeb', {
+			domain: {
+				name: $app.stage == 'prod' ? 'songandtaestudio.com' : 'dev.songandtaestudio.com',
+				aliases: ['dev.songandtaestudio.com'],
+				redirects: ['www.songandtaestudio.com', 'dev.songandtaestudio.com']
+			}
+		});
 	}
 });

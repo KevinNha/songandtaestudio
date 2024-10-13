@@ -34,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/ibm-plex-serif": "^5.1.0",
 		"sst": "3.1.70",
 		"svelte-kit-sst": "2.43.5"
 	}
