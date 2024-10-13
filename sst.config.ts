@@ -18,8 +18,8 @@ export default $config({
 		new sst.aws.SvelteKit('MyWeb', {
 			domain: {
 				name: $app.stage == 'prod' ? 'songandtaestudio.com' : 'dev.songandtaestudio.com',
-				aliases: ['dev.songandtaestudio.com'],
-				redirects: ['www.songandtaestudio.com', 'dev.songandtaestudio.com']
+				aliases:
+					$app.stage == 'prod' ? ['www.songandtaestudio.com'] : ['www.dev.songandtaestudio.com']
 			}
 		});
 	}
