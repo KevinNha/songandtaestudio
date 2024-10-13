@@ -46,3 +46,7 @@ jobs:
           elif [ "${{ github.ref_name }}" == "dev" ]; then
             npx sst deploy --stage dev
           fi
+
+      - name: Output SST Log
+        if: failure() # This step runs only if the previous step fails
+        run: cat .sst/log/sst.log
