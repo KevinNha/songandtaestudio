@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased dynamic-spacing">
+      <body className="antialiased dynamic-spacing bg-[#f9f1f1]">
         <Navbar />
         {children}
       </body>
