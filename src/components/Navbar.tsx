@@ -3,12 +3,15 @@ import { MD_BREAKPOINT } from '@/const/const';
 import { Raleway } from 'next/font/google';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const raleway = Raleway({ weight: ['400', '600'], subsets: ['latin'] });
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [wasNavOpen, setWasNavOpen] = useState(false);
+
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsNavOpen(!isNavOpen);
@@ -37,11 +40,12 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         <Link
           href="/"
-          className={`text-[#111111] font-semibold text-2xl ${
+          className={`w-5/6 text-[#111111] text-xl md:text-2xl ${
             isNavOpen ? 'text-[#fffff4]' : ''
           }`}
         >
-          song and tae studio
+          <span>SONG AND TAE STUDIO</span>{' '}
+          <span className="text-[#A1A1A1]">pet/family portraits</span>
         </Link>
 
         <button
@@ -52,24 +56,49 @@ const Navbar = () => {
         </button>
 
         <ul
-          className={`text-xl text-[#A1A1A1] hover:*:text-[#111111] *:transition-colors *:duration-200 hidden md:flex space-x-4 ${
+          className={`md:text-xl text-[#A1A1A1] hover:*:text-[#111111] *:transition-colors *:duration-200 hidden md:flex space-x-4 ${
             isNavOpen ? 'hidden' : ''
           }`}
         >
           <li>
-            <Link href="/">HOME</Link>
+            <Link
+              href="/"
+              className={`${pathname === '/' ? 'text-[#111111]' : ''}`}
+            >
+              HOME
+            </Link>
           </li>
           <li>
-            <Link href="/gallery">GALLERY</Link>
+            <Link
+              href="/gallery"
+              className={`${pathname === '/gallery' ? 'text-[#111111]' : ''}`}
+            >
+              GALLERY
+            </Link>
           </li>
           <li>
-            <Link href="/catalog">PRICE</Link>
+            <Link
+              href="/catalog"
+              className={`${pathname === '/catalog' ? 'text-[#111111]' : ''}`}
+            >
+              PRICE
+            </Link>
           </li>
           <li>
-            <Link href="/about">ABOUT</Link>
+            <Link
+              href="/about"
+              className={`${pathname === '/about' ? 'text-[#111111]' : ''}`}
+            >
+              ABOUT
+            </Link>
           </li>
           <li>
-            <Link href="/contact">CONTACT</Link>
+            <Link
+              href="/contact"
+              className={`${pathname === '/contact' ? 'text-[#111111]' : ''}`}
+            >
+              CONTACT
+            </Link>
           </li>
         </ul>
       </div>
@@ -82,11 +111,14 @@ const Navbar = () => {
       >
         <Link
           href="/"
-          className={`absolute top-0 left-0 dynamic-spacing font-semibold text-2xl ${
+          className={`absolute top-0 left-0 dynamic-spacing text-xl md:text-2xl ${
             isNavOpen ? 'text-[#fffff4]' : ''
           }`}
         >
-          song and tae studio
+          <div className="relative w-5/6 text-start">
+            <span>SONG AND TAE STUDIO</span>{' '}
+            <span className="text-[#A1A1A1]">pet/family portraits</span>
+          </div>
         </Link>
         <button
           className="absolute top-0 right-0 dynamic-spacing text-3xl hover:text-[#fffff4] focus:outline-none *:transition-colors *:duration-200"
