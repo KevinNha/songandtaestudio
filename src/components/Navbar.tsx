@@ -1,11 +1,11 @@
-"use client";
-import { MD_BREAKPOINT } from "@/const/const";
-import { Raleway } from "next/font/google";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+'use client';
+import { MD_BREAKPOINT } from '@/const/const';
+import { Raleway } from 'next/font/google';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-const raleway = Raleway({ weight: ["400", "600"], subsets: ["latin"] });
+const raleway = Raleway({ weight: ['400', '600'], subsets: ['latin'] });
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -31,8 +31,8 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [isNavOpen, wasNavOpen]);
 
   return (
@@ -41,10 +41,10 @@ const Navbar = () => {
         <Link
           href="/"
           className={`w-5/6 text-[#111111] text-xl md:text-2xl ${
-            isNavOpen ? "text-[#fffff4]" : ""
+            isNavOpen ? 'text-[#fffff4]' : ''
           }`}
         >
-          <span>SONG AND TAE STUDIO</span>{" "}
+          <span>SONG AND TAE STUDIO</span>{' '}
           <span className="text-[#A1A1A1]">pet/family portraits</span>
         </Link>
 
@@ -57,13 +57,13 @@ const Navbar = () => {
 
         <ul
           className={`md:text-xl text-[#A1A1A1] hover:*:text-[#111111] *:transition-colors *:duration-200 hidden md:flex space-x-4 ${
-            isNavOpen ? "hidden" : ""
+            isNavOpen ? 'hidden' : ''
           }`}
         >
           <li>
             <Link
               href="/"
-              className={`${pathname === "/" ? "text-[#111111]" : ""}`}
+              className={`${pathname === '/' ? 'text-[#111111]' : ''}`}
             >
               HOME
             </Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
           <li>
             <Link
               href="/gallery"
-              className={`${pathname === "/gallery" ? "text-[#111111]" : ""}`}
+              className={`${pathname === '/gallery' ? 'text-[#111111]' : ''}`}
             >
               GALLERY
             </Link>
@@ -79,7 +79,7 @@ const Navbar = () => {
           <li>
             <Link
               href="/catalog"
-              className={`${pathname === "/catalog" ? "text-[#111111]" : ""}`}
+              className={`${pathname === '/catalog' ? 'text-[#111111]' : ''}`}
             >
               PRICE
             </Link>
@@ -87,7 +87,7 @@ const Navbar = () => {
           <li>
             <Link
               href="/about"
-              className={`${pathname === "/about" ? "text-[#111111]" : ""}`}
+              className={`${pathname === '/about' ? 'text-[#111111]' : ''}`}
             >
               ABOUT
             </Link>
@@ -95,7 +95,7 @@ const Navbar = () => {
           <li>
             <Link
               href="/contact"
-              className={`${pathname === "/contact" ? "text-[#111111]" : ""}`}
+              className={`${pathname === '/contact' ? 'text-[#111111]' : ''}`}
             >
               CONTACT
             </Link>
@@ -106,17 +106,17 @@ const Navbar = () => {
       {/* Full-screen menu overlay */}
       <div
         className={`fixed inset-0 bg-[#111111] text-[#A7A4A4] flex flex-col justify-center items-center text-center transition-all duration-400 ease-in-out ${
-          isNavOpen ? "opacity-100" : "invisible opacity-0"
+          isNavOpen ? 'opacity-100' : 'invisible opacity-0'
         }`}
       >
         <Link
           href="/"
           className={`absolute top-0 left-0 dynamic-spacing text-xl md:text-2xl ${
-            isNavOpen ? "text-[#fffff4]" : ""
+            isNavOpen ? 'text-[#fffff4]' : ''
           }`}
         >
           <div className="relative w-5/6 text-start">
-            <span>SONG AND TAE STUDIO</span>{" "}
+            <span>SONG AND TAE STUDIO</span>{' '}
             <span className="text-[#A1A1A1]">pet/family portraits</span>
           </div>
         </Link>
