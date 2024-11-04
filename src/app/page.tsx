@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Lato } from 'next/font/google';
+import { Resource } from 'sst';
 
 const lato = Lato({ weight: '400', subsets: ['latin'] });
 

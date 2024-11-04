@@ -9,5 +9,13 @@ declare module "sst" {
       "type": "sst.aws.Nextjs"
       "url": string
     }
+    "distributionLinkable": {
+      "cloudfrontDomain": string
+      "type": "sst.sst.Linkable"
+    }
+    "songandtaestudio-photos-dev": {
+      "name": string
+      "type": "sst.aws.Bucket"
+    }
   }
 }
