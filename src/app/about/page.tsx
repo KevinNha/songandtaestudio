@@ -1,5 +1,5 @@
 import React from 'react';
-import Review from '@/components/Review';
+import Review, { ReviewProps } from '@/components/Review';
 
 const reviews = [
   {
@@ -28,7 +28,7 @@ const Page = () => {
       <h1 className="font-bold text-xl text-gray-400 text-center mt-20 mb-10">
         Client Review
       </h1>
-      {reviews.map((review: any) => {
+      {reviews.map((review: ReviewProps) => {
         return (
           <Review
             name={review.name}

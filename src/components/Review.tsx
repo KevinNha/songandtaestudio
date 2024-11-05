@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ReviewProps = {
+export type ReviewProps = {
   name: string;
   review: string;
   backgroundColor: string;
