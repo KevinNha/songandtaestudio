@@ -4,7 +4,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-row gap-2 items-center justify-center mb-[5vw] w-80 mx-auto">
+    <footer className="flex flex-row gap-2 items-center justify-center mb-[2vw] w-80 mx-auto bottom-0">
       <a
         href="https://www.facebook.com/profile.php?id=100064667021144"
         target="_blank"
