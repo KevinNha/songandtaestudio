@@ -53,7 +53,7 @@ export default $config({
 
     // CloudFront cache policy
     const cloudFrontCachePolicy = new aws.cloudfront.CachePolicy(
-      's3OriginCachePolicy',
+      $app.stage === 'prod' ? 's3OriginCachePolicy' : 's3OriginCachePolicy-dev',
       {
         minTtl: $app.stage === 'prod' ? 31536000 : 86400,
         defaultTtl: $app.stage === 'prod' ? 31536000 : 86400,
@@ -78,9 +78,9 @@ export default $config({
     );
 
     const oac = new aws.cloudfront.OriginAccessControl(
-      'PhotosOAC',
+      $app.stage === 'prod' ? 'PhotosOAC' : 'PhotosOAC-dev',
       {
-        name: 'photos-oac',
+        name: $app.stage === 'prod' ? 'photos-oac' : 'photos-oac-dev',
         originAccessControlOriginType: 's3',
         signingBehavior: 'always',
         signingProtocol: 'sigv4',
@@ -88,31 +88,34 @@ export default $config({
       { dependsOn: [photosBucket] }
     );
 
-    const distribution = new aws.cloudfront.Distribution('MyDistribution', {
-      enabled: true,
-      defaultCacheBehavior: {
-        cachePolicyId: cloudFrontCachePolicy.id,
-        viewerProtocolPolicy: 'redirect-to-https',
-        allowedMethods: ['GET', 'HEAD'],
-        cachedMethods: ['GET', 'HEAD'],
-        targetOriginId: imageDistributionId,
-      },
-      origins: [
-        {
-          originId: imageDistributionId,
-          domainName: photosBucket.domain,
-          originAccessControlId: $interpolate`${oac.id}`,
+    const distribution = new aws.cloudfront.Distribution(
+      $app.stage === 'prod' ? 'PhotosDistribution' : 'PhotosDistribution-dev',
+      {
+        enabled: true,
+        defaultCacheBehavior: {
+          cachePolicyId: cloudFrontCachePolicy.id,
+          viewerProtocolPolicy: 'redirect-to-https',
+          allowedMethods: ['GET', 'HEAD'],
+          cachedMethods: ['GET', 'HEAD'],
+          targetOriginId: imageDistributionId,
         },
-      ],
-      restrictions: {
-        geoRestriction: {
-          restrictionType: 'none',
+        origins: [
+          {
+            originId: imageDistributionId,
+            domainName: photosBucket.domain,
+            originAccessControlId: $interpolate`${oac.id}`,
+          },
+        ],
+        restrictions: {
+          geoRestriction: {
+            restrictionType: 'none',
+          },
         },
-      },
-      viewerCertificate: {
-        cloudfrontDefaultCertificate: true,
-      },
-    });
+        viewerCertificate: {
+          cloudfrontDefaultCertificate: true,
+        },
+      }
+    );
 
     const distributionLinkable = new sst.Linkable('distributionLinkable', {
       properties: { cloudfrontDomain: distribution.domainName },
