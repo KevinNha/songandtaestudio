@@ -89,7 +89,7 @@ export default $config({
             originId: imageDistributionId,
             domainName: photosBucket.domain,
             originAccessControlId:
-              $app.stage === 'prod' ? 'E3VM4PX5Y3JKMM' : 'EFW3LST4U4BOS',
+              $app.stage === 'prod' ? 'E1JCO6QLFG86T6' : 'EFW3LST4U4BOS',
           },
         ],
         restrictions: {
