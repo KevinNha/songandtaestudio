@@ -6,14 +6,10 @@ export default $config({
   app(input) {
     return {
       name: 'songandtaestudio',
-      removal: input?.stage === 'prod' ? 'retain' : 'remove',
       home: 'aws',
       providers: {
         aws: {
-          profile:
-            input.stage === 'prod'
-              ? 'songandtaestudio-prod'
-              : 'songandtaestudio-dev',
+          profile: 'songandtaestudio-dev',
           region: 'us-west-2',
         },
       },
@@ -128,9 +124,6 @@ export default $config({
           $app.stage == 'prod'
             ? ['www.songandtaestudio.com']
             : ['www.dev.songandtaestudio.com'],
-        dns: sst.aws.dns({
-          zone: 'Z07067821MRN75W6WO82U',
-        }),
       },
       permissions: [
         {
