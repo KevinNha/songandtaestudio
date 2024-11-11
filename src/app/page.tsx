@@ -20,7 +20,7 @@ const Home = async () => {
       <div className="columns-1 gap-4 grid justify-items-center mt-4">
         {image_urls.map((url: string, index: number) => (
           <div
-            className="relative mb-8 w-full h-auto md:w-[calc(700px-5vw)] md:max-w-[600px]"
+            className="mb-8 w-full h-auto md:w-[calc(700px-5vw)] md:max-w-[600px]"
             key={index}
           >
             <Image
