@@ -128,6 +128,9 @@ export default $config({
           $app.stage == 'prod'
             ? ['www.songandtaestudio.com']
             : ['www.dev.songandtaestudio.com'],
+        dns: sst.aws.dns({
+          zone: 'Z07067821MRN75W6WO82U',
+        }),
       },
       permissions: [
         {
