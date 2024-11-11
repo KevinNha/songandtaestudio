@@ -10,6 +10,10 @@ declare module "sst" {
       "type": "sst.aws.Nextjs"
       "url": string
     }
+    "bucketNameLinkable": {
+      "name": string
+      "type": "sst.sst.Linkable"
+    }
     "distributionLinkable": {
       "cloudfrontDomain": string
       "type": "sst.sst.Linkable"

@@ -113,8 +113,12 @@ export default $config({
       properties: { cloudfrontDomain: distribution.domainName },
     });
 
+    const bucketNameLinkable = new sst.Linkable('bucketNameLinkable', {
+      properties: { name: photosBucket.name },
+    });
+
     new sst.aws.Nextjs('MyWeb', {
-      link: [photosBucket, distributionLinkable],
+      link: [bucketNameLinkable, distributionLinkable],
       domain: {
         name:
           $app.stage == 'prod'
@@ -125,6 +129,12 @@ export default $config({
             ? ['www.songandtaestudio.com']
             : ['www.dev.songandtaestudio.com'],
       },
+      permissions: [
+        {
+          actions: ['s3:ListBucket'],
+          resources: [photosBucket.arn],
+        },
+      ],
     });
   },
 });

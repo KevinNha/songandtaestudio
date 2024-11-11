@@ -14,7 +14,7 @@ export async function getImages(path: string) {
   }
 
   const command = new ListObjectsV2Command({
-    Bucket: Resource['songandtaestudio-photos-dev'].name,
+    Bucket: Resource.bucketNameLinkable.name,
     Prefix: path,
   });
   const data = await s3Client.send(command);
