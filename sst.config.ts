@@ -77,17 +77,6 @@ export default $config({
       }
     );
 
-    const oac = new aws.cloudfront.OriginAccessControl(
-      $app.stage === 'prod' ? 'PhotosOAC' : 'PhotosOAC-dev',
-      {
-        name: $app.stage === 'prod' ? 'photos-oac' : 'photos-oac-dev',
-        originAccessControlOriginType: 's3',
-        signingBehavior: 'always',
-        signingProtocol: 'sigv4',
-      },
-      { dependsOn: [photosBucket] }
-    );
-
     const distribution = new aws.cloudfront.Distribution(
       $app.stage === 'prod' ? 'PhotosDistribution' : 'PhotosDistribution-dev',
       {
@@ -103,7 +92,10 @@ export default $config({
           {
             originId: imageDistributionId,
             domainName: photosBucket.domain,
-            originAccessControlId: $interpolate`${oac.id}`,
+            originAccessControlId:
+              $app.stage === 'prod'
+                ? `${process.env.OAC_ID_PROD}`
+                : `${process.env.OAC_ID_DEV}`,
           },
         ],
         restrictions: {
