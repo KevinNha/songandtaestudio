@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Configure AWS profile
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "Configuring AWS profile for production"
+            aws configure set aws_access_key_id "${{ secrets.AWS_ACCESS_KEY_ID_PROD }}" --profile songandtaestudio-prod
+            aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}" --profile songandtaestudio-prod
+            aws configure set region "${{ secrets.AWS_REGION }}" --profile songandtaestudio-prod
+          elif [ "${{ github.ref_name }}" == "dev" ]; then
+            echo "Configuring AWS profile for development"
+            aws configure set aws_access_key_id "${{ secrets.AWS_ACCESS_KEY_ID_DEV }}" --profile songandtaestudio-dev
+            aws configure set aws_secret_access_key "${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}" --profile songandtaestudio-dev
+            aws configure set region "${{ secrets.AWS_REGION }}" --profile songandtaestudio-dev
+          else
+            echo "Branch not configured for deployment"
+            exit 1
+          fi
+
+      - name: Deploy to the appropriate stage
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            npx sst deploy --stage prod
+          elif [ "${{ github.ref_name }}" == "dev" ]; then
+            npx sst deploy --stage dev
+          fi
+
+      - name: Output SST Log
+        if: failure() # This step runs only if the previous step fails
+        run: cat .sst/log/sst.log

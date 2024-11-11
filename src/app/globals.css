@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dynamic-spacing {
+  padding-left: 5vw; /* Horizontal padding scales with viewport width */
+  padding-right: 5vw;
+  margin-top: 5vw; /* Top margin scales with viewport width */
+}
