@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased dynamic-spacing bg-[#f9f1f1]">
         <Navbar />
-        <div className="mx-[20vw]">{children}</div>
+        <div className="mx-[10vw]">{children}</div>
         <Footer />
       </body>
     </html>
