@@ -28,9 +28,10 @@ const Page = () => {
       <h1 className="font-bold text-xl text-gray-400 text-center mt-20 mb-10">
         Client Review
       </h1>
-      {reviews.map((review: ReviewProps) => {
+      {reviews.map((review: ReviewProps, index: number) => {
         return (
           <Review
+            key={index}
             name={review.name}
             review={review.review}
             backgroundColor={review.backgroundColor}
