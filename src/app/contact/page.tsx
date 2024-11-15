@@ -1,5 +1,7 @@
+import ComingSoon from '@/components/ComingSoon';
+
 const Page = () => {
-  return <div>contact placeholder</div>;
+  return <ComingSoon />;
 };
 
 export default Page;
