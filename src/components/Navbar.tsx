@@ -45,7 +45,7 @@ const Navbar = () => {
           }`}
         >
           <span>SONG AND TAE STUDIO</span>{' '}
-          <span className="text-[#A1A1A1]">pet/family portraits</span>
+          <span className="text-2xl text-[#A1A1A1]">vancouver artists</span>
         </Link>
 
         <button
