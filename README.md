@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SongAndTaeStudio
 
-## Getting Started
+SongAndTaeStudio is an art gallery website showcasing the works of Song and Tae Studio. Users can view high-quality images of the artwork, read client reviews, and get in touch with the studio. The project is built using Next.js, React, and Tailwind CSS, and leverages AWS services for image storage and distribution. This is all powered by SST.
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### AWS
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. First install AWS CLI on your device [using this link](https://awscli.amazonaws.com/AWSCLIV2.msi)
+2. After installation, check installed correctly by opening `Start` menu, search for `cmd`, and open a command line interface. Then type `aws --version`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### SST
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To run this locally, you must install [SST](https://sst.dev/) by running `npm i -g sst`
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Using the SST console, auto-deployments are set to run against the dev and prod branches of this project.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## AWS Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Because this project uses AWS resources, you must have the correct credentials setup in order to develop locally.
 
-## Deploy on Vercel
+### Initial one-time setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. At the project root, open a terminal
+2. run `aws configure sso` and:
+   - Put in the following details:
+     - **SSO session name (Recommended)**: `songandtaestudio`
+     - **SSO start URL [None]**: `https://songandtaestudio.awsapps.com/start/#`
+     - **SSO region [None]**: `us-west-2`
+     - **SSO registration scope [sso:account:access]**: `AdministratorAccess`
+   - This will open a browser window where you will be prompted to log in. Do so given the credentials provided
+   - After successful login, you have more details to fill in at the terminal:
+     - Choose the `songandtaestudio-dev` account
+     - **CLI default client Region [None]**: `us-west-2`
+     - **CLI default output format [None]**: `json`
+     - **CLI profile name [AdministratorAccess-<account_number>]**: `songandtaestudio-dev`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Refresh credentials
+
+After 12 hours or so, the credentials will expire. When you try to run this locally, it may fail.
+
+To resolve this issue, simply run `npm run sso` and follow the prompts given.
+
+## Running locally
+
+If you want to run this for working on pages that do not interact with SST resources, you can simply run `npm run dev`.
+
+However, I recommend using `sst dev` to get a SST server running locally.
