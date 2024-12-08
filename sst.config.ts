@@ -131,4 +131,15 @@ export default $config({
       ],
     });
   },
+
+  console: {
+    autodeploy: {
+      runner: {
+        engine: 'codebuild',
+        architecture: 'x86_64',
+        compute: 'small',
+        timeout: '1 hour',
+      },
+    },
+  },
 });
