@@ -11,6 +11,35 @@ const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [wasNavOpen, setWasNavOpen] = useState(false);
 
+  const routes = [
+    {
+      path: '/',
+      name: 'HOME',
+    },
+    {
+      path: '/gallery',
+      name: 'GALLERY',
+    },
+    {
+      path: '/catalog',
+      name: 'PRICE',
+    },
+    {
+      path: '/about',
+      name: 'ABOUT',
+    },
+    {
+      path: '/review',
+      name: 'TESTIMONIALS',
+    },
+    {
+      path: '/contact',
+      name: 'CONTACT',
+    },
+  ];
+  const pageTitle = 'SONG AND TAE STUDIO';
+  const pageSubtitle = 'vancouver artists';
+
   const pathname = usePathname();
 
   const toggleMenu = () => {
@@ -37,15 +66,15 @@ const Navbar = () => {
 
   return (
     <nav className={`${raleway.className}`}>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between gap-6">
         <Link
           href="/"
-          className={`w-5/6 text-[#111111] text-xl md:text-2xl ${
+          className={`w-fit text-[#111111] text-xl md:text-2xl ${
             isNavOpen ? 'text-[#fffff4]' : ''
           }`}
         >
-          <span>SONG AND TAE STUDIO</span>{' '}
-          <span className="text-2xl text-[#A1A1A1]">vancouver artists</span>
+          <span>{pageTitle}</span>{' '}
+          <span className="text-2xl text-[#A1A1A1]">{pageSubtitle}</span>
         </Link>
 
         <button
@@ -55,52 +84,20 @@ const Navbar = () => {
           ☰
         </button>
 
-        <ul
-          className={`md:text-xl text-[#A1A1A1] hover:*:text-[#111111] *:transition-colors *:duration-200 hidden md:flex space-x-4 ${
-            isNavOpen ? 'hidden' : ''
-          }`}
+        <div
+          className={`md:text-xl text-[#A1A1A1] hover:*:text-[#111111] *:transition-colors *:duration-200 hidden md:w-fit justify-end md:flex md:flex-wrap space-x-4`}
         >
-          <li>
-            <Link
-              href="/"
-              className={`${pathname === '/' ? 'text-[#111111]' : ''}`}
-            >
-              HOME
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/gallery"
-              className={`${pathname === '/gallery' ? 'text-[#111111]' : ''}`}
-            >
-              GALLERY
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/catalog"
-              className={`${pathname === '/catalog' ? 'text-[#111111]' : ''}`}
-            >
-              PRICE
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/about"
-              className={`${pathname === '/about' ? 'text-[#111111]' : ''}`}
-            >
-              ABOUT
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/contact"
-              className={`${pathname === '/contact' ? 'text-[#111111]' : ''}`}
-            >
-              CONTACT
-            </Link>
-          </li>
-        </ul>
+          {routes.map((route, index) => (
+            <span key={index}>
+              <Link
+                href={route.path}
+                className={`${pathname === route.path ? 'text-[#111111]' : ''}`}
+              >
+                {route.name}
+              </Link>
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Full-screen menu overlay */}
@@ -116,8 +113,8 @@ const Navbar = () => {
           }`}
         >
           <div className="relative w-5/6 text-start">
-            <span>SONG AND TAE STUDIO</span>{' '}
-            <span className="text-[#A1A1A1]">pet/family portraits</span>
+            <span>{pageTitle}</span>{' '}
+            <span className="text-2xl text-[#A1A1A1]">{pageSubtitle}</span>
           </div>
         </Link>
         <button
@@ -127,41 +124,16 @@ const Navbar = () => {
           ✕
         </button>
         <div className="text-3xl space-y-10">
-          <Link
-            href="/"
-            onClick={toggleMenu}
-            className="block hover:text-[#fffff4]"
-          >
-            HOME
-          </Link>
-          <Link
-            href="/gallery"
-            onClick={toggleMenu}
-            className="block hover:text-[#fffff4]"
-          >
-            GALLERY
-          </Link>
-          <Link
-            href="/catalog"
-            onClick={toggleMenu}
-            className="block hover:text-[#fffff4]"
-          >
-            PRICE
-          </Link>
-          <Link
-            href="/about"
-            onClick={toggleMenu}
-            className="block hover:text-[#fffff4]"
-          >
-            ABOUT
-          </Link>
-          <Link
-            href="/contact"
-            onClick={toggleMenu}
-            className="block hover:text-[#fffff4]"
-          >
-            CONTACT
-          </Link>
+          {routes.map((route, index) => (
+            <Link
+              key={index}
+              href={route.path}
+              onClick={toggleMenu}
+              className="block hover:text-[#fffff4]"
+            >
+              {route.name}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>
