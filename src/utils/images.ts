@@ -5,6 +5,7 @@ const s3Client = new S3Client();
 
 enum allowedPages {
   home = 'home',
+  about = 'about',
   gallery = 'gallery',
 }
 
