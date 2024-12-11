@@ -42,6 +42,8 @@ const ImageContainer = ({
   return (
     <div className={`${position} w-full h-auto md:max-w-[500px] shadow-2xl`}>
       <Image
+        placeholder="blur"
+        blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0MTV1AgACJQDiYdH2PgAAAABJRU5ErkJggg=="
         className="object-cover rounded-lg"
         src={`https://${imageUrl}`}
         alt={alt}

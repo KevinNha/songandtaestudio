@@ -26,6 +26,8 @@ const Home = async () => {
             key={index}
           >
             <Image
+              placeholder="blur"
+              blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0MTV1AgACJQDiYdH2PgAAAABJRU5ErkJggg=="
               className="object-cover"
               src={`https://${url}`}
               alt={`home_image_${index}`}
