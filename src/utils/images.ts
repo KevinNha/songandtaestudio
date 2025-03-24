@@ -3,11 +3,12 @@ import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
 
 const s3Client = new S3Client();
 
-enum allowedPages {
-  home = 'home',
-  about = 'about',
-  gallery = 'gallery',
-}
+const allowedPages = {
+  home: 'home',
+  about: 'about',
+  galleryMom: 'gallery/mom',
+  galleryDad: 'gallery/dad',
+};
 
 export async function getImages(path: string) {
   if (!(path in allowedPages)) {
@@ -16,7 +17,7 @@ export async function getImages(path: string) {
 
   const command = new ListObjectsV2Command({
     Bucket: Resource.bucketNameLinkable.name,
-    Prefix: path,
+    Prefix: allowedPages[path as keyof typeof allowedPages],
   });
   const data = await s3Client.send(command);
 
