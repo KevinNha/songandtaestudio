@@ -10,6 +10,13 @@ const allowedPages = {
   galleryDad: 'gallery/dad',
 };
 
+const sortImagePath = (imagePaths: string[]) => {
+  return imagePaths.sort((a: string, b: string) => {
+    const getName = (url: string) => parseFloat(url.split('/').pop() || '0');
+    return getName(a) - getName(b);
+  });
+};
+
 export async function getImages(path: string) {
   if (!(path in allowedPages)) {
     return new Response('Invalid page', { status: 400 });
@@ -22,13 +29,12 @@ export async function getImages(path: string) {
   const data = await s3Client.send(command);
 
   const objectNames = data.Contents
-    ? data.Contents.splice(1).map(
-        (item) =>
-          `${Resource.distributionLinkable.cloudfrontDomain}/${item.Key}`
+    ? sortImagePath(
+        data.Contents.splice(1).map((item) => item.Key as string)
+      ).map(
+        (item) => `${Resource.distributionLinkable.cloudfrontDomain}/${item}`
       )
     : [];
-
-  console.log(objectNames);
 
   return new Response(JSON.stringify(objectNames), { status: 200 });
 }

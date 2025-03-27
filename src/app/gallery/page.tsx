@@ -10,10 +10,11 @@ const gowun = Gowun_Batang({ weight: '400', subsets: ['latin'] });
 const Page = async () => {
   const dataMom = await getImages('galleryMom');
   const momImageUrls = await dataMom.json();
-  console.log(momImageUrls);
 
   const dataDad = await getImages('galleryDad');
   const dadImageUrls = await dataDad.json();
+
+  // console.log(dadImageUrls);
 
   return (
     <div className="grid grid-cols-4 gap-4 h-full">
