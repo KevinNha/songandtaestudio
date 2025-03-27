@@ -2,6 +2,8 @@ import GalleryImage from '@/components/GalleryImage';
 import { getImages } from '@/utils/images';
 import { Gowun_Batang, Josefin_Sans } from 'next/font/google';
 
+export const dynamic = 'force-dynamic';
+
 const josefinSans = Josefin_Sans({ weight: '300', subsets: ['latin'] });
 const gowun = Gowun_Batang({ weight: '400', subsets: ['latin'] });
 
