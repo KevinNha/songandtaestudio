@@ -3,26 +3,26 @@
 /* eslint-disable */
 /* deno-fmt-ignore-file */
 
-declare module 'sst' {
+declare module "sst" {
   export interface Resource {
-    MyWeb: {
-      type: 'sst.aws.Nextjs';
-    };
-    bucketNameLinkable: {
-      name: string;
-      type: 'sst.sst.Linkable';
-    };
-    distributionLinkable: {
-      cloudfrontDomain: string;
-      type: 'sst.sst.Linkable';
-    };
-    'songandtaestudio-photos-dev': {
-      name: string;
-      type: 'sst.aws.Bucket';
-    };
+    "MyWeb": {
+      "type": "sst.aws.Nextjs"
+    }
+    "bucketNameLinkable": {
+      "name": string
+      "type": "sst.sst.Linkable"
+    }
+    "distributionLinkable": {
+      "cloudfrontDomain": string
+      "type": "sst.sst.Linkable"
+    }
+    "songandtaestudio-photos-dev": {
+      "name": string
+      "type": "sst.aws.Bucket"
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />
 
-import 'sst';
-export {};
+import "sst"
+export {}
