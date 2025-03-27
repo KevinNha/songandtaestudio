@@ -28,5 +28,7 @@ export async function getImages(path: string) {
       )
     : [];
 
+  console.log(objectNames);
+
   return new Response(JSON.stringify(objectNames), { status: 200 });
 }
