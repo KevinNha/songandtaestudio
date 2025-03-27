@@ -15,11 +15,11 @@ export default function GalleryImage({ imageUrl, index }: GalleryImageProps) {
   return (
     <>
       <div
-        className="h-auto w-full md:w-[calc(600px-5vw)] md:max-w-[500px] flex-shrink-0 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-[1.02]"
+        className="h-auto w-full md:w-[calc(600px-5vw)] md:max-w-[500px] flex-shrink-0 cursor-pointer overflow-hidden"
         onClick={() => setIsModalOpen(true)}
       >
         <Image
-          className="rounded-lg object-cover"
+          className="rounded-lg object-cover hover:scale-[1.40] transition-transform duration-300 ease-in-out"
           src={`https://${imageUrl}`}
           alt={`Gallery image ${index}`}
           width={1500}
