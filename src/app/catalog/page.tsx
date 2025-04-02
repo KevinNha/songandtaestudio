@@ -2,6 +2,9 @@ import PriceTable, {
   PriceTableCol,
   PriceCollection,
 } from '@/components/PriceTable';
+import { Lato } from 'next/font/google';
+
+const lato = Lato({ weight: '400', subsets: ['latin'] });
 
 const data: PriceCollection[] = [
   {
@@ -102,25 +105,24 @@ const columns: PriceTableCol[] = [
 
 const Page = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4 text-[#111111]">Pricing</h1>
+    <div className={`${lato.className}`}>
       <PriceTable data={data} columns={columns} />
-      <p className="mt-10 mb-5 text-xs">
+      <p className="mt-10 mb-5 text-sm italic">
         *No cost for mottled, blurry background, and partly detailed background.
         A charge applies for detailed backgrounds requiring over 5 hours to
         describe.
       </p>
-      <p className="text-xs">
+      <p className="text-sm italic">
         *For portraits related to disabled people and pets, a 20% discount is
         applied.
       </p>
-      <p className="mt-5 text-xs">
+      <p className="mt-5 text-sm">
         Delivery is handled by Canada Post, and the delivery cost is not
         included in the artwork price. However, residents in Greater Vancouver
         can pick up the artwork, or I can deliver it to you. For more questions,
         feel free to contact me via email anytime.
       </p>
-      <p className="mt-5 mb-10 text-xs">
+      <p className="mt-5 mb-10 text-sm">
         People in Greater Vancouver could receive free delivery.
       </p>
     </div>
