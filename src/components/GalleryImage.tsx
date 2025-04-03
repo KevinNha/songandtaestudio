@@ -19,7 +19,7 @@ export default function GalleryImage({ imageUrl, index }: GalleryImageProps) {
         onClick={() => setIsModalOpen(true)}
       >
         <Image
-          className="rounded-lg object-cover hover:scale-[1.40] transition-transform duration-300 ease-in-out"
+          className="rounded-lg object-cover hover:scale-[1.40] transition-transform duration-[850ms] ease-in-out"
           src={`https://${imageUrl}`}
           alt={`Gallery image ${index}`}
           width={1500}
