@@ -51,10 +51,7 @@ export default $config({
     const ses = new sst.aws.Email(
       $app.stage === 'prod' ? 'contact-us-email' : 'contact-us-email-dev',
       {
-        sender:
-          $app.stage === 'prod'
-            ? 'songandtaestudio.com'
-            : 'dev.songandtaestudio.com',
+        sender: 'songandtaestudio.com',
       }
     );
 
