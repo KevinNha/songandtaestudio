@@ -12,8 +12,17 @@ declare module "sst" {
       "name": string
       "type": "sst.sst.Linkable"
     }
+    "contact-us-email-dev": {
+      "configSet": string
+      "sender": string
+      "type": "sst.aws.Email"
+    }
     "distributionLinkable": {
       "cloudfrontDomain": string
+      "type": "sst.sst.Linkable"
+    }
+    "sesSenderLinkable": {
+      "email": string
       "type": "sst.sst.Linkable"
     }
     "songandtaestudio-photos-dev": {
