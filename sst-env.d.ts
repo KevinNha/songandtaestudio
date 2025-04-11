@@ -12,7 +12,7 @@ declare module "sst" {
       "name": string
       "type": "sst.sst.Linkable"
     }
-    "contact-us-email-dev": {
+    "contact-us-email": {
       "configSet": string
       "sender": string
       "type": "sst.aws.Email"

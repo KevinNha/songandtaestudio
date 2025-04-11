@@ -1,5 +1,6 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
+import { AlreadyExistsException } from '@aws-sdk/client-ses';
 import * as aws from '@pulumi/aws';
 
 export default $config({
@@ -48,12 +49,14 @@ export default $config({
     );
 
     // SES
-    const ses = new sst.aws.Email(
-      $app.stage === 'prod' ? 'contact-us-email' : 'contact-us-email-dev',
-      {
+    let ses: sst.aws.Email;
+    if ($app.stage === 'prod' || $app.stage === 'dev') {
+      ses = sst.aws.Email.get('contact-us-email', 'songandtaestudio.com');
+    } else {
+      ses = new sst.aws.Email('contact-us-email', {
         sender: 'songandtaestudio.com',
-      }
-    );
+      });
+    }
 
     // CloudFront cache policy
     const cloudFrontCachePolicy = new aws.cloudfront.CachePolicy(
