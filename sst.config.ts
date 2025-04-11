@@ -1,5 +1,6 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
+import { AlreadyExistsException } from '@aws-sdk/client-ses';
 import * as aws from '@pulumi/aws';
 
 export default $config({
@@ -46,6 +47,16 @@ export default $config({
         },
       }
     );
+
+    // SES
+    let ses: sst.aws.Email;
+    if ($app.stage === 'prod' || $app.stage === 'dev') {
+      ses = sst.aws.Email.get('contact-us-email', 'songandtaestudio.com');
+    } else {
+      ses = new sst.aws.Email('contact-us-email', {
+        sender: 'songandtaestudio.com',
+      });
+    }
 
     // CloudFront cache policy
     const cloudFrontCachePolicy = new aws.cloudfront.CachePolicy(
@@ -111,8 +122,12 @@ export default $config({
       properties: { name: photosBucket.name },
     });
 
+    const sesSenderLinkable = new sst.Linkable('sesSenderLinkable', {
+      properties: { email: ses.sender },
+    });
+
     new sst.aws.Nextjs('MyWeb', {
-      link: [bucketNameLinkable, distributionLinkable],
+      link: [bucketNameLinkable, distributionLinkable, sesSenderLinkable],
       domain: {
         name:
           $app.stage == 'prod'
@@ -128,7 +143,17 @@ export default $config({
           actions: ['s3:ListBucket'],
           resources: [photosBucket.arn],
         },
+        {
+          actions: ['ses:SendEmail'],
+          resources: ['*'],
+        },
       ],
+      environment: {
+        SES_DESTINATION:
+          $app.stage === 'prod'
+            ? 'songjjeongkim@gmail.com'
+            : 'songandtaestudio@gmail.com',
+      },
     });
   },
 
