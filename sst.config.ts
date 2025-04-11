@@ -47,6 +47,17 @@ export default $config({
       }
     );
 
+    // SES
+    const ses = new sst.aws.Email(
+      $app.stage === 'prod' ? 'contact-us-email' : 'contact-us-email-dev',
+      {
+        sender:
+          $app.stage === 'prod'
+            ? 'songandtaestudio.com'
+            : 'dev.songandtaestudio.com',
+      }
+    );
+
     // CloudFront cache policy
     const cloudFrontCachePolicy = new aws.cloudfront.CachePolicy(
       $app.stage === 'prod' ? 's3OriginCachePolicy' : 's3OriginCachePolicy-dev',
@@ -111,8 +122,12 @@ export default $config({
       properties: { name: photosBucket.name },
     });
 
+    const sesSenderLinkable = new sst.Linkable('sesSenderLinkable', {
+      properties: { email: ses.sender },
+    });
+
     new sst.aws.Nextjs('MyWeb', {
-      link: [bucketNameLinkable, distributionLinkable],
+      link: [bucketNameLinkable, distributionLinkable, sesSenderLinkable],
       domain: {
         name:
           $app.stage == 'prod'
@@ -128,7 +143,17 @@ export default $config({
           actions: ['s3:ListBucket'],
           resources: [photosBucket.arn],
         },
+        {
+          actions: ['ses:SendEmail'],
+          resources: ['*'],
+        },
       ],
+      environment: {
+        SES_DESTINATION:
+          $app.stage === 'prod'
+            ? 'songjjeongkim@gmail.com'
+            : 'songandtaestudio@gmail.com',
+      },
     });
   },
 

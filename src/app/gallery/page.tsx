@@ -14,8 +14,6 @@ const Page = async () => {
   const dataDad = await getImages('galleryDad');
   const dadImageUrls = await dataDad.json();
 
-  // console.log(dadImageUrls);
-
   return (
     <div className="grid grid-cols-4 gap-4 h-full">
       <p className={`${josefinSans.className} col-span-4 text-2xl`}>
