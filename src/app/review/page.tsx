@@ -1,46 +1,39 @@
-const Page = () => {
+import { Josefin_Sans, Lato } from 'next/font/google';
+import { getReviews } from '@/utils/reviews';
+import { Review as ReviewType } from '@/utils/reviews';
+import Review from '@/components/Review';
+
+const josefinSans = Josefin_Sans({ weight: '300', subsets: ['latin'] });
+const lato = Lato({ weight: '400', subsets: ['latin'] });
+
+const Page = async () => {
+  const reviews = await getReviews();
   return (
     <div>
-      <h1 className="w-full text-center tracking-[10px]">TESTIMONIALS</h1>
-      <hr className="my-8 border-t border-gray-300 " />
+      <div className="mb-12">
+        <h1
+          className={`${josefinSans.className} font-bold text-2xl w-full text-center tracking-[10px]`}
+        >
+          TESTIMONIALS
+        </h1>
+        <h2
+          className={`${lato.className} text-center text-gray-400 tracking-wide`}
+        >
+          What people are saying about us
+        </h2>
+      </div>
+      {reviews.map((review: ReviewType, index: number) => {
+        return (
+          <div key={index}>
+            <Review name={review.name.S} review={review.review.S} />
+            {index < reviews.length - 1 && (
+              <hr className="my-8 border-t border-gray-300 " />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 export default Page;
-
-{
-  // const reviews = [
-  //   {
-  //     name: 'Olivia',
-  //     review:
-  //       "Having to see my old dog's portrait made me feel that he was alive again. Such memories can be brought back to life with great sincerity. Thank you.",
-  //     backgroundColor: '#FED7AA',
-  //   },
-  //   {
-  //     name: 'Peter',
-  //     review:
-  //       "Such art should never be forgotten. I love what I've received back. The colors are so vibrant that they feel alive. The time and the effort that was spent for my children will never be forgotten.",
-  //     backgroundColor: '#FED7AA',
-  //   },
-  //   {
-  //     name: 'Claire',
-  //     review:
-  //       "I'm now debt-free and saving for a home because of your help. Thank you. Dagraw!",
-  //     backgroundColor: '#FED7AA',
-  //   },
-  // ];
-  /* <h1 className="font-bold text-xl text-gray-400 text-center mt-20 mb-10">
-        Client Review
-      </h1>
-      {reviews.map((review: ReviewProps, index: number) => {
-        return (
-          <Review
-            key={index}
-            name={review.name}
-            review={review.review}
-            backgroundColor={review.backgroundColor}
-          />
-        );
-      })} */
-}
