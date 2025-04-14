@@ -6,6 +6,8 @@ import Review from '@/components/Review';
 const josefinSans = Josefin_Sans({ weight: '300', subsets: ['latin'] });
 const lato = Lato({ weight: '400', subsets: ['latin'] });
 
+export const dynamic = 'force-dynamic';
+
 const Page = async () => {
   const reviews = await getReviews();
   return (
