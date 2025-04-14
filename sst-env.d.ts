@@ -8,6 +8,10 @@ declare module "sst" {
     "MyWeb": {
       "type": "sst.aws.Nextjs"
     }
+    "ReviewsTable": {
+      "name": string
+      "type": "sst.aws.Dynamo"
+    }
     "bucketNameLinkable": {
       "name": string
       "type": "sst.sst.Linkable"

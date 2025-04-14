@@ -1,6 +1,5 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
-import { AlreadyExistsException } from '@aws-sdk/client-ses';
 import * as aws from '@pulumi/aws';
 
 export default $config({
@@ -57,6 +56,16 @@ export default $config({
         sender: 'songandtaestudio.com',
       });
     }
+
+    // DynamoDB
+    const reviewsTable = new sst.aws.Dynamo('ReviewsTable', {
+      fields: {
+        id: 'string',
+      },
+      primaryIndex: {
+        hashKey: 'id',
+      },
+    });
 
     // CloudFront cache policy
     const cloudFrontCachePolicy = new aws.cloudfront.CachePolicy(
@@ -127,7 +136,12 @@ export default $config({
     });
 
     new sst.aws.Nextjs('MyWeb', {
-      link: [bucketNameLinkable, distributionLinkable, sesSenderLinkable],
+      link: [
+        bucketNameLinkable,
+        distributionLinkable,
+        sesSenderLinkable,
+        reviewsTable,
+      ],
       domain: {
         name:
           $app.stage == 'prod'
