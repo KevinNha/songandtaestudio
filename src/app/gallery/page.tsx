@@ -1,4 +1,4 @@
-import GalleryImage from '@/components/GalleryImage';
+import GallerySection from '@/components/GallerySection';
 import { getImages } from '@/utils/images';
 import { Gowun_Batang, Josefin_Sans } from 'next/font/google';
 
@@ -16,26 +16,16 @@ const Page = async () => {
 
   return (
     <div className="grid grid-cols-4 gap-4 h-full">
-      <p className={`${josefinSans.className} col-span-4 text-2xl`}>
-        Song Jeong Kim / 김송정
-      </p>
-      <div className="col-span-4 overflow-x-auto">
-        <div className="flex flex-row gap-4">
-          {momImageUrls.map((image: string, index: number) => (
-            <GalleryImage key={index} imageUrl={image} index={index} />
-          ))}
-        </div>
-      </div>
-      <p className={`${gowun.className} col-span-4 text-2xl`}>
-        Tae Moon Jeon / 전태문
-      </p>
-      <div className="col-span-4 overflow-x-auto">
-        <div className="flex flex-row gap-4">
-          {dadImageUrls.map((image: string, index: number) => (
-            <GalleryImage key={index} imageUrl={image} index={index} />
-          ))}
-        </div>
-      </div>
+      <GallerySection
+        images={momImageUrls}
+        title="Song Jeong Kim / 김송정"
+        fontClassName={josefinSans.className}
+      />
+      <GallerySection
+        images={dadImageUrls}
+        title="Tae Moon Jeon / 전태문"
+        fontClassName={gowun.className}
+      />
     </div>
   );
 };
